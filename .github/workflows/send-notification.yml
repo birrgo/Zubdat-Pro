@@ -1,4 +1,4 @@
-name: Send Push Notification
+Name: Send Push Notification
 
 on:
   workflow_dispatch:
