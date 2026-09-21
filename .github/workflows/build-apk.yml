@@ -28,7 +28,6 @@ jobs:
       - name: Install Dependencies & Esbuild
         run: |
           if [ ! -f package.json ]; then npm init -y; fi
-          # Added @capacitor/app and @capacitor/network for Back Button and Offline functionality
           npm install @capacitor/core@8 @capacitor/cli@8 @capacitor/android@8 @capacitor/splash-screen@8 @capacitor/app@8 @capacitor/network@8 capacitor-admob-nextgen@1.2.9 @onesignal/capacitor-plugin esbuild
 
       - name: Initialize AdMob SDK Variables
@@ -241,7 +240,7 @@ jobs:
 
           # Set adaptive icon background color to clean white
           mkdir -p android/app/src/main/res/values
-          cat << 'EOF' > android/app/src/values/ic_launcher_background.xml
+          cat << 'EOF' > android/app/src/main/res/values/ic_launcher_background.xml
           <?xml version="1.0" encoding="utf-8"?>
           <resources>
               <color name="ic_launcher_background">#FFFFFF</color>
@@ -311,7 +310,6 @@ jobs:
       - name: Set Version Code and Name
         run: |
           sed -i 's/versionCode [0-9]*/versionCode ${{ github.run_number }}/' android/app/build.gradle
-          # Uses the APP_VERSION variable you set at the top of the file
           sed -i 's/versionName "[^"]*"/versionName "${{ env.APP_VERSION }}"/' android/app/build.gradle
 
       - name: Add Google Services JSON
